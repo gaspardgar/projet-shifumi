@@ -7,8 +7,7 @@ function App() {
 
   return(
     <>
-    <h1>ShiFuMi in React</h1>
-    <Game/>
+    <h1>Hello World</h1>
     </>
   );
  
