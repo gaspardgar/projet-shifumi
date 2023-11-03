@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import GameItem from './GameItem';
 
 export default function Game() {
-  const [userChoice, setUserChoice] = useState(null);
-  const [user2Choice, setUser2Choice] = useState(null);
+  const [userChoice, setUserChoice] = useState([]);
+  const [user2Choice, setUser2Choice] = useState([]);
   const [result, setResult] = useState('');
 
   const handleUserChoice = (choice) => {
-    const choices = ['rock', 'paper', 'scissors'];
+    const choices = ['pierre', 'feuille', 'ciseaux'];
+
+
+    const handleSelection = (option) => {
+        if (!playerOneChoice) {
+          setPlayerOneChoice(option);
+        } else if (!playerTwoChoice) {
+          setPlayerTwoChoice(option);
+        }
+      };
+    
+    let user2Choice = "pierre";
 
     let result;
     if (choice === user2Choice) {
-      result = 'It\'s a tie!';
+      result = 'Egalité !';
     } else if (
-      (choice === 'rock' && user2Choice === 'scissors') ||
-      (choice === 'paper' && user2Choice === 'rock') ||
-      (choice === 'scissors' && user2Choice === 'paper')
+      (choice === 'pierre' && user2Choice === 'ciseaux') ||
+      (choice === 'papier' && user2Choice === 'pierre') ||
+      (choice === 'ciseaux' && user2Choice === 'papier')
     ) {
-      result = 'You win!';
+      result = 'Gagné !';
     } else {
-      result = 'You lose!';
+      result = 'Perdu !';
     }
 
     setUserChoice(choice);
@@ -27,10 +38,10 @@ export default function Game() {
   };
 
   return (
-    <div>
-      <GameItem onChoice={handleUserChoice} />
-      <p>Adversary choice: {user2Choice}</p>
-      <p>{result}</p>
+    <div style={{ backgroundColor: 'Tomato', padding: '30px' }}>
+        <GameItem onChoice={handleUserChoice} />
+        <p>Adversary choice: {user2Choice}</p>
+        <p>{result}</p>
     </div>
   );
 }
