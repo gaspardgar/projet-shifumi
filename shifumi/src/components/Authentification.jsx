@@ -5,13 +5,14 @@ import FormControl from '@mui/joy/FormControl';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 export default function Authentification() {
     const navigate = useNavigate();
 
     const handleLogin = (userInfo) => {
         console.log('login');
-        fetch('http://localhost:3002/login', {
+        fetch('http://fauques.freeboxos.fr:3000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,15 +21,16 @@ export default function Authentification() {
         })
             .then((response) => response.json())
             .then((data) => {
+                Cookies.set('token', data.token);
                 console.log(data);
-                navigate("/home");
+                navigate("/");
             });
 
     };
 
     const handleRegister = (userInfo) => {
         console.log('register');
-        fetch('http://localhost:3002/register', {
+        fetch('http://fauques.freeboxos.fr:3000/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
