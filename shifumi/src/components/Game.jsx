@@ -36,6 +36,10 @@ export default function Game() {
     setResult(result);
   };
 
+  const myGames = [
+    { userChoice: 'pierre', user2Choice: 'sciseaux' },
+    { userChoice: 'papier', user2Choice: 'pierre' },
+  ];
   
 
   return (
