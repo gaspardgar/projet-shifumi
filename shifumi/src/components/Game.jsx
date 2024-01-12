@@ -2,13 +2,12 @@ import { useState } from 'react';
 import GameItem from './GameItem';
 
 export default function Game() {
-  const [userChoice, setUserChoice] = useState([]);
-  const [user2Choice, setUser2Choice] = useState([]);
+  const [userChoice, setUserChoice] = useState('');
+  const [user2Choice, setUser2Choice] = useState('');
   const [result, setResult] = useState('');
 
   const handleUserChoice = (choice) => {
     const choices = ['pierre', 'feuille', 'ciseaux'];
-
 
     const handleSelection = (option) => {
         if (!playerOneChoice) {
@@ -18,7 +17,7 @@ export default function Game() {
         }
       };
     
-    let user2Choice = "pierre";
+    setUser2Choice("pierre");
 
     let result;
     if (choice === user2Choice) {
@@ -36,6 +35,8 @@ export default function Game() {
     setUserChoice(choice);
     setResult(result);
   };
+
+  
 
   return (
     <div style={{ backgroundColor: 'Tomato', padding: '30px' }}>
