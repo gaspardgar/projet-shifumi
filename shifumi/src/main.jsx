@@ -5,6 +5,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider,} from "react-router-dom";
 import Authentification from './components/Authentification.jsx';
 import Game from './components/Game.jsx';
+import HomePage from './components/Homepage.jsx';
 
 
 const router = createBrowserRouter([
@@ -13,12 +14,12 @@ const router = createBrowserRouter([
     element: <Authentification/>,
   },
   {
-    path: "/game",
+    path: '/game/:gameId',
     element: <Game/>
   },
   {
     path: "/",
-    element: <App/>,
+    element: <HomePage/>,
   }
 ]);
 

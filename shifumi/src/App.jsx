@@ -6,20 +6,15 @@ import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import GameList from './components/GameList';
+import HomePage from './components/Homepage';
 
 function App() {
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    // Redirect to the desired page as soon as the component is mounted
-    if (!Cookies.get('token')) {
-      navigate("/auth");
-    }
-  }, []);
 
-  return(
+  return (
     <>
-    <h1>Hello World</h1>
+    <HomePage/>
     </>
   );
  

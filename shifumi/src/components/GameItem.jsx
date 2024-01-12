@@ -7,9 +7,9 @@ export default function GameItem({ onChoice }) {
 
   return (
     <div>
-      <button onClick={() => handleItemClick('pierre')}>Pierre</button>
-      <button onClick={() => handleItemClick('papier')}>Papier</button>
-      <button onClick={() => handleItemClick('ciseaux')}>Ciseaux</button>
+      <button onClick={() => handleItemClick('rock')}>Pierre</button>
+      <button onClick={() => handleItemClick('paper')}>Papier</button>
+      <button onClick={() => handleItemClick('scissor')}>Ciseaux</button>
     </div>
   );
 }
