@@ -3,6 +3,8 @@ import { Link, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 import { Button } from '@mui/joy';
+import Sheet from '@mui/joy/Sheet';
+
 
 
 function GameResult({ winner }) {
@@ -14,13 +16,17 @@ function GameResult({ winner }) {
 
   return (
     <>
-      <div>
+      <Sheet variant="soft" color="success" sx={{ p: 4 }}>
         <h1>La partie est finie ! :-/ </h1>
-        <h2>Vainqueur: {winner.username}</h2>
+        {winner === null ?
+          <p>Match nul !</p>
+          :
+          <p>Le gagnant est {winner.username} !</p>
+        }
         <Button onClick={handleNavigateToHome} variant="solid" color="primary">
           Retour à la page d'accueil
         </Button>
-      </div>
+        </Sheet>
     </>
   );
 }

@@ -4,6 +4,7 @@ import GameItem from './GameItem';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
 import GameResult from './GameResult';
+import Sheet from '@mui/joy/Sheet';
 // import EventSource from 'eventsource';
 
 export default function Game(...props) {
@@ -124,7 +125,7 @@ export default function Game(...props) {
         if (data === "{turn: \"move already given\"}") {
           setStatusMessage("Vous avez déjà joué attendez votre adversaire");
         } else if (data = "{turn: \"not last\"}") {
-          setStatusMessage("Erreur ce n'est pas le bon tour");
+          setStatusMessage("Erreur, ce n'est pas votre tour");
         } else {
           setStatusMessage("");
           setUserChoice(choice);
@@ -137,15 +138,16 @@ export default function Game(...props) {
   return (
     <>
       <h1>Game {gameId}</h1>
-      <div style={{ backgroundColor: 'Tomato', padding: '30px' }}>
+      <Sheet variant="soft" color="primary" sx={{ p: 4 }}>
+      <div>
         {nextTurnNumber > 3 ?
           <>
-            <p>Manche {nextTurnNumber}</p>
-            {statusMessage && <p>{statusMessage}</p>}
             <GameResult winner={gameData.winner} />
           </>
           :
           <>
+            <h4>Manche {nextTurnNumber}</h4>
+            {statusMessage && <p>{statusMessage}</p>}
             <GameItem onChoice={handleUserChoice} />
           </>
         }
@@ -153,6 +155,7 @@ export default function Game(...props) {
         <p>User2 choice: {user2Choice}</p> */}
         <p>Winners: {result}</p>
       </div>
+      </Sheet>
     </>
   );
 }
