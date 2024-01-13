@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 
 export default function Authentification() {
     const navigate = useNavigate();
+    const [message, setMessage] = useState('');
 
     const handleLogin = (userInfo) => {
         console.log('login');
@@ -21,9 +22,17 @@ export default function Authentification() {
         })
             .then((response) => response.json())
             .then((data) => {
+                // detec if server returns 401
+
+
+                if (data == "Unauthorized") {
+                    setMessage("Mauvais mot de pass ou nom d'utilisateur");
+                }
                 Cookies.set('token', data.token);
-                console.log(data);
                 navigate("/");
+            })
+            .catch((error) => {
+                console.error('Error:', error);
             });
 
     };
@@ -64,6 +73,7 @@ export default function Authentification() {
                 <Stack direction="column" spacing={1}>
                     <Input placeholder="username" required />
                     <Input placeholder="password" required />
+                    {message && <Text>{message}</Text>}
                     <Stack direction="row" spacing={3} justifyContent="space-evenly">
                         <Button type="submit" name="login">
                             Login
