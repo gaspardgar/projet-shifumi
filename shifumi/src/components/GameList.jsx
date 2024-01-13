@@ -16,13 +16,14 @@ function GameList({ games }) {
         <>
             <div>
                 <h1>Liste des parties</h1>
-                <Table variant='solid' size='lg' >
+                <Table variant='solid' size='lg'>
                     <thead>
                         <tr>
                             <th>Partie (id)</th>
                             <th>Joueur 1</th>
                             <th>Joueur 2</th>
                             <th>Statut (user1-draw-user2)</th>
+                            <th>Winner</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -33,14 +34,14 @@ function GameList({ games }) {
                                 <td style={{ textAlign: 'left' }}>{game.user1.username}</td>
                                 <td style={{ textAlign: 'left' }}>{game.user2 ? game.user2.username : 'En attente d\'un joueur'}</td>
                                 <td style={{ textAlign: 'left' }}>
-                                    {/* counts user1 wins */}
                                     {game.turns.filter(turn => turn.winner === "user1").length}
                                     -
-                                    {/* counts draws */}
                                     {game.turns.filter(turn => turn.winner === 'draw').length}
                                     -
-                                    {/* counts user2 wins */}
                                     {game.turns.filter(turn => turn.winner === "user2").length}
+                                </td>
+                                <td style={{ textAlign: 'left' }}>
+                                    {game.winner ? game.winner.username : (game.turns.length === 3 ? 'Match nul' : 'En cours')}
                                 </td>
                                 <td style={{ textAlign: 'left' }}>
                                     <Button onClick={() => handleNavigateToGame(game._id)} variant="solid" color="primary">

@@ -5,6 +5,9 @@ import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
 import GameResult from './GameResult';
 import Sheet from '@mui/joy/Sheet';
+import Stepper from '@mui/joy/Stepper';
+import Step from '@mui/joy/Step';
+import StepIndicator from '@mui/joy/StepIndicator';
 // import EventSource from 'eventsource';
 
 export default function Game(...props) {
@@ -68,44 +71,44 @@ export default function Game(...props) {
       getGame();
     }, 5000);
     //  work for notifications (not working for now)
-        // opening a connection to the server to begin receiving events from it
-        const eventSource = new EventSource('http://fauques.freeboxos.fr:3000/matches/' + gameId + '/subscribe', {
-          headers: {
-            "Authorization": "Bearer " + Cookies.get('token'),
-          },
-        });
-    
-    
-        // // attaching a handler to receive message events
-        // eventSource.onmessage = (event) => {
-        //   console.log(event);
-        //   if (gameId === event.matchId) {
-        //     if (event.type === "NEW_TURN") {
-        //       setNextTurnNumber(event.payload.turnId);
-        //     } else if (event.type === "TURN_ENDED") {
-        //       setNextTurnNumber(event.payload.newTurnId);
-        //       // "winner_username", // "winner_username"|"draw",
-        //       if (event.payload.winner === "draw") {
-        //         setResult("Egalité");
-        //       } else {
-        //         setResult(event.payload.winner.substring(7));
-        //       }
-        //     } else if (event.type === "PLAYER_MOVED") {
-    
-        //     } else if (event.type === "MATCH_ENDED") {
-        //       if (event.payload.winner === "draw") {
-        //         setResult("Egalité");
-        //       } else {
-        //         setResult(event.payload.winner.substring(7));
-        //       }
-        //     }
-        //   };
-        // };
-        // terminating the connection on component unmount
-        return () => {
-          // eventSource.close();
-          clearInterval(interval)
-        };
+    // opening a connection to the server to begin receiving events from it
+    const eventSource = new EventSource('http://fauques.freeboxos.fr:3000/matches/' + gameId + '/subscribe', {
+      headers: {
+        "Authorization": "Bearer " + Cookies.get('token'),
+      },
+    });
+
+
+    // // attaching a handler to receive message events
+    // eventSource.onmessage = (event) => {
+    //   console.log(event);
+    //   if (gameId === event.matchId) {
+    //     if (event.type === "NEW_TURN") {
+    //       setNextTurnNumber(event.payload.turnId);
+    //     } else if (event.type === "TURN_ENDED") {
+    //       setNextTurnNumber(event.payload.newTurnId);
+    //       // "winner_username", // "winner_username"|"draw",
+    //       if (event.payload.winner === "draw") {
+    //         setResult("Egalité");
+    //       } else {
+    //         setResult(event.payload.winner.substring(7));
+    //       }
+    //     } else if (event.type === "PLAYER_MOVED") {
+
+    //     } else if (event.type === "MATCH_ENDED") {
+    //       if (event.payload.winner === "draw") {
+    //         setResult("Egalité");
+    //       } else {
+    //         setResult(event.payload.winner.substring(7));
+    //       }
+    //     }
+    //   };
+    // };
+    // terminating the connection on component unmount
+    return () => {
+      // eventSource.close();
+      clearInterval(interval)
+    };
   }, []);
 
   const handleUserChoice = (choice) => {
@@ -139,22 +142,28 @@ export default function Game(...props) {
     <>
       <h1>Game {gameId}</h1>
       <Sheet variant="soft" color="primary" sx={{ p: 4 }}>
-      <div>
-        {nextTurnNumber > 3 ?
-          <>
-            <GameResult winner={gameData.winner} />
-          </>
-          :
-          <>
-            <h4>Manche {nextTurnNumber}</h4>
-            {statusMessage && <p>{statusMessage}</p>}
-            <GameItem onChoice={handleUserChoice} />
-          </>
-        }
-        {/* <p>User1 choice: {userChoice}</p>
+        <div>
+          <Stepper sx={{ width: '100%' }}>
+            <Step indicator={<StepIndicator variant="solid" color={nextTurnNumber > 0 ? "success" : "neutral"}>1</StepIndicator>}>Manche 1</Step>
+            <Step indicator={<StepIndicator variant="solid" color={nextTurnNumber > 2 ? "success" : "neutral"}>2</StepIndicator>}>Manche 2</Step>
+            <Step indicator={<StepIndicator variant="solid" color={nextTurnNumber > 3 ? "success" : "neutral"}>3</StepIndicator>}>Manche 3</Step>
+            <Step indicator={<StepIndicator variant="solid" color={nextTurnNumber > 3 ? "success" : "neutral"}>4</StepIndicator>}>Result</Step>
+          </Stepper>
+          <br></br>
+          {nextTurnNumber > 3 ?
+            <>
+              <GameResult winner={gameData.winner} />
+            </>
+            :
+            <>
+              {statusMessage && <p>{statusMessage}</p>}
+              <GameItem onChoice={handleUserChoice} />
+            </>
+          }
+          {/* <p>User1 choice: {userChoice}</p>
         <p>User2 choice: {user2Choice}</p> */}
-        <p>Winners: {result}</p>
-      </div>
+          <p>Winners: {result}</p>
+        </div>
       </Sheet>
     </>
   );

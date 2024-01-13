@@ -53,14 +53,15 @@ function HomePage() {
       });
   };
 
-
-
   return (
+    <>
+    <Button color="warning" onClick={() => { Cookies.remove('token'); navigate("/auth"); }}>Déconnexion</Button>
     <div>
       <h1>Shifumi</h1>
       <Button onClick={handleCreateGame}>Rejoindre une nouvelle partie</Button>
       <GameList games={games} />
     </div>
+    </>
   );
 }
 
