@@ -1,10 +1,6 @@
-import React from 'react';
-import { useState } from 'react';
-import { Stack } from '@mui/joy';
-import FormControl from '@mui/joy/FormControl';
-import Input from '@mui/joy/Input';
-import Button from '@mui/joy/Button';
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Stack, FormControl, Input, Button } from '@mui/joy';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 export default function Authentification() {

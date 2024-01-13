@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import myGames from './Game';
-import { Table } from '@mui/joy';
-import { Button } from '@mui/joy';
-import { useNavigate } from "react-router-dom";
+import { Table, Button } from '@mui/joy';
+import { useNavigate } from 'react-router-dom';
 
 function GameList({ games }) {
     const navigate = useNavigate();

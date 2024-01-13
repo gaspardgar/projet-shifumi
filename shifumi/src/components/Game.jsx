@@ -1,13 +1,9 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import GameItem from './GameItem';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
+import GameItem from './GameItem';
 import GameResult from './GameResult';
-import Sheet from '@mui/joy/Sheet';
-import Stepper from '@mui/joy/Stepper';
-import Step from '@mui/joy/Step';
-import StepIndicator from '@mui/joy/StepIndicator';
+import { Sheet, Stepper, Step, StepIndicator } from '@mui/joy';
 // import EventSource from 'eventsource';
 
 export default function Game(...props) {
@@ -70,13 +66,14 @@ export default function Game(...props) {
     const interval = setInterval(() => {
       getGame();
     }, 5000);
+    
     //  work for notifications (not working for now)
     // opening a connection to the server to begin receiving events from it
-    const eventSource = new EventSource('http://fauques.freeboxos.fr:3000/matches/' + gameId + '/subscribe', {
-      headers: {
-        "Authorization": "Bearer " + Cookies.get('token'),
-      },
-    });
+    // const eventSource = new EventSource('http://fauques.freeboxos.fr:3000/matches/' + gameId + '/subscribe', {
+    //   headers: {
+    //     "Authorization": "Bearer " + Cookies.get('token'),
+    //   },
+    // });
 
 
     // // attaching a handler to receive message events

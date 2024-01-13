@@ -1,11 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import GameList from './GameList';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
 import { Button, Link as MuiLink } from '@mui/joy';
+import GameList from './GameList';
+
 
 function HomePage() {
   const navigate = useNavigate();
