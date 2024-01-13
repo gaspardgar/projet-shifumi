@@ -41,7 +41,7 @@ function GameList({ games }) {
                                     {game.turns.filter(turn => turn.winner === "user2").length}
                                 </td>
                                 <td style={{ textAlign: 'left' }}>
-                                    {game.winner ? game.winner.username : (game.turns.length === 3 ? 'Match nul' : 'En cours')}
+                                    {game.winner !== null ? (game.winner ? game.winner.username : "En cours") : "Match nul"}
                                 </td>
                                 <td style={{ textAlign: 'left' }}>
                                     <Button onClick={() => handleNavigateToGame(game._id)} variant="solid" color="primary">
