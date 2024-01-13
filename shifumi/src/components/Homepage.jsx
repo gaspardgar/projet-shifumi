@@ -59,7 +59,6 @@ function HomePage() {
     <div>
       <h1>Shifumi</h1>
       <Button onClick={handleCreateGame}>Rejoindre une nouvelle partie</Button>
-
       <GameList games={games} />
     </div>
   );

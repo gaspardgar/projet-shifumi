@@ -31,8 +31,8 @@ function GameList({ games }) {
                             <td style={{ textAlign: 'left' }}>Partie {index + 1} ({game._id})</td>
                             <td style={{ textAlign: 'left' }}>{game.user1.username}</td>
                             <td style={{ textAlign: 'left' }}>{game.user2 ? game.user2.username : 'En attente d\'un joueur'}</td>
-                            <td style={{ textAlign: 'left' }}>{game.user1Score} - {game.user2Score}</td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: 'left' }}>{game.user1.username.toUpperCase()}:{game.user1Score} - {game.user2.username.toUpperCase()}:{game.user2Score}</td>
+                            <td style={{ textAlign: 'left' }}>   
                                 <Button onClick={() => handleNavigateToGame(game._id)} variant="solid" color="primary">
                                     Rejoindre
                                 </Button>
