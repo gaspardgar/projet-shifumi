@@ -32,7 +32,7 @@ function HomePage() {
       .then((data) => {
         console.log('GET /matches');
         console.log(data);
-        setGames(data);
+        setGames(data.reverse());
       });
   };
 

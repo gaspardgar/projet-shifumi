@@ -67,9 +67,7 @@ export default function Game(...props) {
     const interval = setInterval(() => {
       getGame();
     }, 5000);
-
-    return () => clearInterval(interval);
-    /* work for notifications (not working for now)
+    //  work for notifications (not working for now)
         // opening a connection to the server to begin receiving events from it
         const eventSource = new EventSource('http://fauques.freeboxos.fr:3000/matches/' + gameId + '/subscribe', {
           headers: {
@@ -78,34 +76,36 @@ export default function Game(...props) {
         });
     
     
-        // attaching a handler to receive message events
-        eventSource.onmessage = (event) => {
-          console.log(event);
-          if (gameId === event.matchId) {
-            if (event.type === "NEW_TURN") {
-              setNextTurnNumber(event.payload.turnId);
-            } else if (event.type === "TURN_ENDED") {
-              setNextTurnNumber(event.payload.newTurnId);
-              // "winner_username", // "winner_username"|"draw",
-              if (event.payload.winner === "draw") {
-                setResult("Egalité");
-              } else {
-                setResult(event.payload.winner.substring(7));
-              }
-            } else if (event.type === "PLAYER_MOVED") {
+        // // attaching a handler to receive message events
+        // eventSource.onmessage = (event) => {
+        //   console.log(event);
+        //   if (gameId === event.matchId) {
+        //     if (event.type === "NEW_TURN") {
+        //       setNextTurnNumber(event.payload.turnId);
+        //     } else if (event.type === "TURN_ENDED") {
+        //       setNextTurnNumber(event.payload.newTurnId);
+        //       // "winner_username", // "winner_username"|"draw",
+        //       if (event.payload.winner === "draw") {
+        //         setResult("Egalité");
+        //       } else {
+        //         setResult(event.payload.winner.substring(7));
+        //       }
+        //     } else if (event.type === "PLAYER_MOVED") {
     
-            } else if (event.type === "MATCH_ENDED") {
-              if (event.payload.winner === "draw") {
-                setResult("Egalité");
-              } else {
-                setResult(event.payload.winner.substring(7));
-              }
-            }
-          };
-        };
+        //     } else if (event.type === "MATCH_ENDED") {
+        //       if (event.payload.winner === "draw") {
+        //         setResult("Egalité");
+        //       } else {
+        //         setResult(event.payload.winner.substring(7));
+        //       }
+        //     }
+        //   };
+        // };
         // terminating the connection on component unmount
-        return () => eventSource.close();
-        */
+        return () => {
+          // eventSource.close();
+          clearInterval(interval)
+        };
   }, []);
 
   const handleUserChoice = (choice) => {
